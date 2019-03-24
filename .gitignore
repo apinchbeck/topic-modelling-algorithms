@@ -1,9 +1,19 @@
 # Files to be ignored by git
 
+.installed.cfg
+bin
+develop-eggs
+dist
+downloads
+eggs
+parts
+*egg-info*
+lib
+lib64
+
 .fuse_hidden*
 .directory
 .Trash-*
 .nfs*
 *.pyc
-
-*egg-info*
+*.pyo
