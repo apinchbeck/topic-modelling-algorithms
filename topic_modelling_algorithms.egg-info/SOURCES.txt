@@ -1,7 +1,0 @@
-README.rst
-setup.py
-topic_modelling_algorithms.egg-info/PKG-INFO
-topic_modelling_algorithms.egg-info/SOURCES.txt
-topic_modelling_algorithms.egg-info/dependency_links.txt
-topic_modelling_algorithms.egg-info/requires.txt
-topic_modelling_algorithms.egg-info/top_level.txt
