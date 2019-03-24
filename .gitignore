@@ -1,0 +1,6 @@
+# Files to be ignored by git
+
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
