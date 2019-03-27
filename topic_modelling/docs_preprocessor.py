@@ -30,6 +30,9 @@ class DocsPreprocessor:
 
     Methods
     -------
+    process(docs)
+        Essentially the main method. Calls all other methods in order
+        to process a csv doc in preparation for topic modelling.
     tokenize_doc(doc)
         Splits a csv file into a collection of tokenized words in order
         to process the words for topic modelling. 
@@ -59,6 +62,9 @@ class DocsPreprocessor:
         
     def process(self, docs):
         """
+        Essentially the main method. Calls all other methods in order
+        to process a csv doc in preparation for topic modelling.
+        
         Fully processes a csv doc:
             - tokenizes
             - removes numbers
