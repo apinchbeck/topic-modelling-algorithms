@@ -16,6 +16,19 @@ Getting Started
 
 Dependencies
 ------------
+*Required Packages*
+
+- warnings
+- unittest
+- pandas
+- numpy
+- nltk
+
+*Input Data*
+
+The input file must be csv format. Whichever column of data is your short text
+to be modelled must have the field name "description". This is something that 
+will hopefully be fixed in later releases. 
 
 Installing
 ----------
@@ -37,6 +50,15 @@ Angie Pinchbeck
 
 Version History
 ===============
+
+Change Log
+----------
+
+To Do
+-----
+
+- Edit code to make it so that the required document can just be a list
+    of short text, instead of one that needs "description" as its title.
 
 License
 =======
