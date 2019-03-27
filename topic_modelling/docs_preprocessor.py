@@ -53,4 +53,23 @@ class DocsPreprocessor:
             docs[idx] = tokenizer.tokenize(docs[idx])  # Split into words.
         return docs
 
-    
+    def remove_numbers(self, docs):
+        """
+        Parameters
+        ----------
+        docs : numpy.ndarray
+            An array of lists, where each list represents one "document"
+            to be used in the modelling, and each item in the list is 
+            one word from the document. 
+
+        Returns
+        -------
+        list
+            An array of lists that has been stripped of numbers, where 
+            each list represents one "document" to be used in the 
+            modelling, and each item in the list is one word from the 
+            document.
+        """
+        # Remove numbers, but not words that contain numbers.
+        docs = [[token for token in doc if not token.isdigit()] for doc in docs]
+        return docs
