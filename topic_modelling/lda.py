@@ -1,7 +1,7 @@
 # Import required packages
 import numpy as np
 import logging
-#import pyLDAvis.gensim
+import pyLDAvis.gensim
 import json
 import pandas as pd
 import warnings
@@ -13,7 +13,7 @@ from gensim.corpora.dictionary import Dictionary
 from numpy import array
 
 # Import dataset
-p_df = pd.read_csv('./description.csv')
+p_df = pd.read_csv('./docs/description.csv')
 # Create sample of 1000 descriptions
 #p_df = p_df.sample(n = 1000)
 # Convert to array
@@ -48,6 +48,7 @@ def docs_preprocessor(docs):
 docs = docs_preprocessor(docs)
 #Create Biagram & Trigram Models 
 from gensim.models import Phrases
+
 # Add bigrams and trigrams to docs,minimum count 10 means only that appear 10 times or more.
 bigram = Phrases(docs, min_count=10)
 trigram = Phrases(bigram[docs])
