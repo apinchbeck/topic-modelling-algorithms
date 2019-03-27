@@ -51,14 +51,28 @@ class DocsPreprocessor:
         self.stop_words = set(stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
         
+    def process(self, docs):
+        """
+        Fully processes a csv doc:
+            - tokenizes
+            - removes numbers
+            - removes nltk stop words
+            - lemmatizes
+            - creates bigrams and trigrams
+        """
+        result = self.tokenize_doc(docs)
+        result = self.remove_numbers(result)
+        result = self.remove_nltk_stopwords(result)
+        result = self.lemmatize_doc(result)
+        result = self.append_bigrams_and_trigrams(result)
+        return result
+    
     def append_bigrams_and_trigrams(self, docs):
         """
         Turns common phrases into bigrams and trigrams.
 
         Methodology taken from:
         https://www.machinelearningplus.com/nlp/topic-modeling-gensim-python/
-
-        Methods called:
         """
         
         bigram = Phrases(docs, min_count=5, threshold=100)

@@ -57,6 +57,15 @@ class TestDocsPreprocessor(unittest.TestCase):
             'you', 'think'
         ]]
         
+    def test_process(self):
+        result = self.dp.process(self.description_1000)
+        count_front_end = 0
+        for row in result:
+            for r in row:
+                if r == "front_end": count_front_end += 1
+        # There are 6 instances of either "front end" or "front-end"
+        self.assertTrue(count_front_end == 6)
+    
     def test_append_bigrams_and_trigrams(self):
         result = self.dp.tokenize_doc(self.description_1000)
         result = self.dp.remove_numbers(result)
