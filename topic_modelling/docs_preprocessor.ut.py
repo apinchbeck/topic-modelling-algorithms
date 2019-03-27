@@ -18,24 +18,43 @@ class TestDocsPreprocessor(unittest.TestCase):
         # ['a', 'easy', 'way', 'to', 'use', 'android', 'sharepreference']
         self.test_array1 = [
             'a', 'easy', 'way', 'to', 'use', 'android', 'sharepreference']
+        
         # self.test_array2
         # [['A', 'Go', 'API', 'client', 'for', 'the', 'v2', 'Docker', 
         #    'Registry', 'API']]
         self.test_array2 = [[
             'A', 'Go', 'API', 'client', 'for', 'the', 'v2', 'Docker', 
             'Registry', 'API']]
+        
         # self.test_array3
         # [['A', 'Go', 'API', 'client', 'for', 'the', 'v2', 'Docker', 
         #    'Registry', 'API', '2']]
         self.test_array3 = [[
             'A', 'Go', 'API', 'client', 'for', 'the', 'v2', 'Docker', 
             'Registry', 'API', '2']]
+        
         # self.test_array4
         # [['A', 'Go', 'API', 'client', 'for', 'the', 'v2', 'Docker', 
         #    'Registry', 'API', 'two']]
         self.test_array4 = [[
             'A', 'Go', 'API', 'client', 'for', 'the', 'v2', 'Docker', 
             'Registry', 'API', 'two']]
+        
+        # self.test_array5
+        # [['a', 'boilerplate', 'for', 'a', 'Koa', 'Redux', 'React', 
+        # 'application', 'with', 'Webpack,', 'Mocha', 'and', 'SASS']]
+        self.test_array5 = [[
+            'a', 'boilerplate', 'for', 'a', 'Koa', 'Redux', 'React', 
+            'application', 'with', 'Webpack,', 'Mocha', 'and', 'SASS'
+        ]]
+
+        # self.test_array6
+        # 'Many', 'corpora', 'have', 'better', 'values', 'than', 
+        # 'you', 'think'
+        self.test_array6 = [[
+            'Many', 'corpora', 'have', 'better', 'values', 'than', 
+            'you', 'think'
+        ]]
         
 
     def test_tokenize_doc_type_1(self):
@@ -88,21 +107,45 @@ class TestDocsPreprocessor(unittest.TestCase):
         result = self.dp.remove_numbers(self.test_array4)
         self.assertEqual(result, self.test_array4)
     
-    def test_remove_nltk_stopwords_type(self):
-        test_array = [[
-            'a', 'boilerplate', 'for', 'a', 'Koa', 'Redux', 'React', 
-            'application', 'with', 'Webpack,', 'Mocha', 'and', 'SASS'
-        ]]
+    def test_remove_nltk_stopwords(self):
+        # self.test_array5
+        # [['a', 'boilerplate', 'for', 'a', 'Koa', 'Redux', 'React', 
+        # 'application', 'with', 'Webpack,', 'Mocha', 'and', 'SASS']]
         expected_result = [[
             'boilerplate', 'Koa', 'Redux', 'React', 'application', 
             'Webpack,', 'Mocha', 'SASS'
         ]]
-        result = self.dp.remove_nltk_stopwords(test_array)
+        result = self.dp.remove_nltk_stopwords(self.test_array5)
         self.assertEqual(expected_result, result)
-        
-    def test_stopwords(self):
-        stop_words = self.dp.stop_words
-        self.assertFalse("p" in stop_words)
+    
+    def test_remove_nltk_stopwords_type(self):
+        # self.test_array5
+        # [['a', 'boilerplate', 'for', 'a', 'Koa', 'Redux', 'React', 
+        # 'application', 'with', 'Webpack,', 'Mocha', 'and', 'SASS']]
+        expected_result = [[
+            'boilerplate', 'Koa', 'Redux', 'React', 'application', 
+            'Webpack,', 'Mocha', 'SASS'
+        ]]
+        result = self.dp.remove_nltk_stopwords(self.test_array5)
+        self.assertEqual(type(expected_result), type(result))
+
+    def test_lemmatize_doc_type(self):
+        # self.test_array6
+        # 'React', 'component', 'for', 'inputting', 'numeric', 
+        # 'values', 'within', 'a', 'range'
+        result = self.dp.lemmatize_doc(self.test_array6)
+        self.assertEqual(type(self.test_array6), type(result))
+
+    def test_lemmatize_doc(self):
+        # self.test_array6
+        # 'Many', 'corpora', 'have', 'better', 'values', 'than', 
+        # 'you', 'think'
+        expected_result = [[
+            'Many', u'corpus', 'have', u'well', u'value', 'than', 
+            'you', 'think'
+        ]]
+        result = self.dp.lemmatize_doc(self.test_array6)
+        self.assertEqual(expected_result, result)
 
 if __name__ == '__main__':
     unittest.main()
