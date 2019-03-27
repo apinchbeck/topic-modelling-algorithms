@@ -12,6 +12,8 @@ from nltk.corpus import stopwords # 179 words as of 2019-03-26
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.corpus import wordnet
 
+from gensim.models import Phrases
+from gensim.models.phrases import Phraser
 
 class DocsPreprocessor:
     """
@@ -38,6 +40,10 @@ class DocsPreprocessor:
         Removes NLTK stopwords from a tokenized list. 
     lemmatize_doc(docs)
         Lemmatizes a list of lists. 
+    get_wordnet_pos(word)
+        Map POS tag to first character lemmatize() accepts.
+    append_bigrams_and_trigrams(docs)
+        Turns common phrases into bigrams and trigrams.
 
     """
     
@@ -45,6 +51,26 @@ class DocsPreprocessor:
         self.stop_words = set(stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
         
+    def append_bigrams_and_trigrams(self, docs):
+        """
+        Turns common phrases into bigrams and trigrams.
+
+        Methodology taken from:
+        https://www.machinelearningplus.com/nlp/topic-modeling-gensim-python/
+
+        Methods called:
+        """
+        
+        bigram = Phrases(docs, min_count=5, threshold=100)
+        bigram_mod = Phraser(bigram)
+        trigram = Phrases(bigram[docs], threshold=100)
+        trigram_mod = Phraser(trigram)
+        
+        bigrams = [bigram_mod[doc] for doc in docs]
+        trigrams = [trigram_mod[bigram_mod[doc]] for doc in docs]
+        
+        return trigrams
+
     def tokenize_doc(self, doc):
         """
         Splits a csv file into a collection of tokenized words in order
@@ -94,6 +120,7 @@ class DocsPreprocessor:
     def get_wordnet_pos(self, word):
         """
         Map POS tag to first character lemmatize() accepts.
+        
         Method taken from:
         https://www.machinelearningplus.com/nlp/lemmatization-examples-python/
 

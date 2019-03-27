@@ -11,9 +11,10 @@ class TestDocsPreprocessor(unittest.TestCase):
     """
     
     def setUp(self):
-        self.doc1 = pd.read_csv("docs/description.csv")
+        self.description = pd.read_csv("docs/description.csv")
+        self.description_1000 = pd.read_csv("docs/description_1000.csv")
         self.dp = DocsPreprocessor()
-        
+
         # self.test_array1
         # ['a', 'easy', 'way', 'to', 'use', 'android', 'sharepreference']
         self.test_array1 = [
@@ -56,23 +57,35 @@ class TestDocsPreprocessor(unittest.TestCase):
             'you', 'think'
         ]]
         
+    def test_append_bigrams_and_trigrams(self):
+        result = self.dp.tokenize_doc(self.description_1000)
+        result = self.dp.remove_numbers(result)
+        result = self.dp.remove_nltk_stopwords(result)
+        result = self.dp.lemmatize_doc(result)
+        result = self.dp.append_bigrams_and_trigrams(result)
+        count_open_source = 0
+        for row in result:
+            for r in row:
+                if r == "open_source": count_open_source += 1
+        # There are 17 instances of either "open source" or "open-source"
+        self.assertTrue(count_open_source == 17)
 
     def test_tokenize_doc_type_1(self):
-        result = self.dp.tokenize_doc(self.doc1)
+        result = self.dp.tokenize_doc(self.description)
         self.assertEqual(type(result), numpy.ndarray)
     
     def test_tokenize_doc_type_2(self):
-        result = self.dp.tokenize_doc(self.doc1)
+        result = self.dp.tokenize_doc(self.description)
         self.assertEqual(type(result[0]), list)
     
     def test_tokenize_doc_contents_1(self):
-        result = self.dp.tokenize_doc(self.doc1)
+        result = self.dp.tokenize_doc(self.description)
         # self.test_array1
         # ['a', 'easy', 'way', 'to', 'use', 'android', 'sharepreference']
         self.assertEqual(result[0], self.test_array1)
 
     def test_tokenize_doc_lowercase(self):
-        result = self.dp.tokenize_doc(self.doc1)
+        result = self.dp.tokenize_doc(self.description)
         actual_word = "webworker" # Lowercase from actual WebWorker
         self.assertEqual(result[11][1], actual_word)
 

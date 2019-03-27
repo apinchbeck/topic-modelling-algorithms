@@ -48,6 +48,7 @@ def docs_preprocessor(docs):
 docs = docs_preprocessor(docs)
 #Create Biagram & Trigram Models 
 from gensim.models import Phrases
+
 # Add bigrams and trigrams to docs,minimum count 10 means only that appear 10 times or more.
 bigram = Phrases(docs, min_count=10)
 trigram = Phrases(bigram[docs])

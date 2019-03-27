@@ -23,6 +23,7 @@ Dependencies
 - pandas
 - numpy
 - nltk
+- gensim
 
 *Input Data*
 
