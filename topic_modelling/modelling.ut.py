@@ -11,5 +11,13 @@ class TestModelling(unittest.TestCase):
     """
     Test the Modelling class.
     """
-    def test_run_algorithms(self):
-        
+    def setUp(self):
+        self.description_csv = pd.read_csv("docs/description.csv")
+        self.description_1000_csv = pd.read_csv("docs/description_1000.csv")
+        self.mdl = Modelling(self.description_1000_csv)
+    
+    def test_run_lda(self):
+        self.mdl.run_lda(5, 20, 5)
+
+if __name__ == '__main__':
+    unittest.main()

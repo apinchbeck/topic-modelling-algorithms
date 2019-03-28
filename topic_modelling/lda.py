@@ -24,7 +24,6 @@ class LDA:
         """
         """
         self.docs = docs
-        print(type(self.docs))
 
     def compute_coherence_values(self, kmin, kmax, kstep):
         """
@@ -50,6 +49,7 @@ class LDA:
         coherence_values = []
         topic_list = []
         for num_topics in range(kmin, kmax+1, kstep):
+            # The following print line is so that you can visually see it go and don't freak out
             print("num_topics:\t" + str(num_topics))
             model=LdaModel(corpus=corpus, id2word=dictionary, num_topics=num_topics)
             coherencemodel = CoherenceModel(model=model, texts=self.docs, dictionary=dictionary, coherence='c_v')
