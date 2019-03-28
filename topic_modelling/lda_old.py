@@ -105,7 +105,8 @@ import matplotlib.pyplot as plt
 import csv
 
 def main():
-    model_list, coherence_values, topic_list = compute_coherence_values(dictionary=dictionary, corpus=corpus, texts=docs, start=20, limit=101, step=20)
+    model_list, coherence_values, topic_list = compute_coherence_values(
+        dictionary=dictionary, corpus=corpus, texts=docs, start=20, limit=101, step=20)
     
     i = 0
     coherence_data = []
@@ -121,7 +122,9 @@ def main():
             t_row = []
             t_row.append(top)
             topwords_data.append(t_row)
-        with open('./results-lda/topic-list-' + str(num_topics) + '.csv', 'w', newline='') as csvFile:
+        with open(
+            './results-lda/topic-list-' + str(
+                num_topics) + '.csv', 'w', newline='') as csvFile:
             writer = csv.writer(csvFile)
             writer.writerows(topwords_data)
         csvFile.close()

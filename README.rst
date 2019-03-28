@@ -28,6 +28,7 @@ Dependencies
 - operator
 - itertools
 - matplotlib
+- csv
 
 *Input Data*
 

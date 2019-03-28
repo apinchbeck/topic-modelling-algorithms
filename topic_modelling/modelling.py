@@ -7,6 +7,8 @@ from nmf import NMF
 from lda import LDA
 from docs_preprocessor import DocsPreprocessor
 
+import csv
+
 class Modelling:
     """
     A class used to do STTM.
@@ -34,6 +36,7 @@ class Modelling:
             self.lda.compute_coherence_values(kmin, kmax, kstep)
         # The next returns the best # of topics and saves the plot
         best_k = self.plot_coherence(k_values, coherence_values, "lda")
+        self.write_lda_data(topic_list, coherence_values)
 
     def run_nmf(self, kmin, kmax, kstep, top):
         k_values, coherence_values = self.nmf.process_models(
@@ -59,4 +62,31 @@ class Modelling:
         # save the plot
         plt.savefig(name + "-coherence.jpg")
         return best_k
-        
+
+    def write_lda_data(self, topic_list, coherence_values):
+        """
+        """
+        i = 0
+        coherence_data = []
+        for topic in topic_list:
+            num_topics = str(len(topic))
+            row = []
+            row.append(num_topics)
+            row.append(str(coherence_values[i]))
+            coherence_data.append(row)
+            i += 1
+            topwords_data = []
+            for top in topic:
+                t_row = []
+                t_row.append(top)
+                topwords_data.append(t_row)
+            with open(
+                './lda-topic-list-' + str(
+                    num_topics) + '.csv', 'w', newline='') as csvFile:
+                writer = csv.writer(csvFile)
+                writer.writerows(topwords_data)
+            csvFile.close()
+
+        with open('./coherence-data.csv', 'w', newline='') as csvFile:
+            writer = csv.writer(csvFile)
+            writer.writerows(coherence_data)
