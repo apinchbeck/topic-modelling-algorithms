@@ -27,8 +27,8 @@ Dependencies
 - sklearn
 - operator
 - itertools
-- matplotlib
-- csv
+- mathplotlib
+- os.path
 
 *Input Data*
 
