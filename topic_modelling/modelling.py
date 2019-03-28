@@ -42,26 +42,11 @@ class Modelling:
         k_values, coherence_values = self.nmf.process_models(
             kmin, kmax, kstep, top)
         best_k = self.plot_coherence(k_values, coherence_values, "nmf")
+        
 
-    def plot_coherence(self, k_values, coherences, name):
-        fig = plt.figure(figsize=(13,7))
-        # create the line plot
-        ax = plt.plot( k_values, coherences )
-        plt.xticks(k_values)
-        plt.xlabel("Number of Topics")
-        plt.ylabel("Mean Coherence")
-        # add the points
-        plt.scatter( k_values, coherences, s=120)
-        # find and annotate the maximum point on the plot
-        ymax = max(coherences)
-        xpos = coherences.index(ymax)
-        best_k = k_values[xpos]
-        plt.annotate( 
-            "k=%d" % best_k, xy=(best_k, ymax), xytext=(
-                best_k, ymax), textcoords="offset points", fontsize=16)
-        # save the plot
-        plt.savefig(name + "-coherence.jpg")
-        return best_k
+    def write_nmf_data(self):
+        """
+        """
 
     def write_lda_data(self, topic_list, coherence_values):
         """
@@ -90,3 +75,23 @@ class Modelling:
         with open('./coherence-data.csv', 'w', newline='') as csvFile:
             writer = csv.writer(csvFile)
             writer.writerows(coherence_data)
+
+    def plot_coherence(self, k_values, coherences, name):
+        fig = plt.figure(figsize=(13,7))
+        # create the line plot
+        ax = plt.plot( k_values, coherences )
+        plt.xticks(k_values)
+        plt.xlabel("Number of Topics")
+        plt.ylabel("Mean Coherence")
+        # add the points
+        plt.scatter( k_values, coherences, s=120)
+        # find and annotate the maximum point on the plot
+        ymax = max(coherences)
+        xpos = coherences.index(ymax)
+        best_k = k_values[xpos]
+        plt.annotate( 
+            "k=%d" % best_k, xy=(best_k, ymax), xytext=(
+                best_k, ymax), textcoords="offset points", fontsize=16)
+        # save the plot
+        plt.savefig(name + "-coherence.jpg")
+        return best_k

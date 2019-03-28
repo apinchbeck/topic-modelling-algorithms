@@ -47,7 +47,7 @@ class NMF:
             # Now calculate the coherence based on our Word2vec model
             k_values.append( k )
             coherences.append( self.calculate_coherence(self.create_word_embedding_model(), term_rankings ) )
-            print("K=%02d: Coherence=%.4f" % ( k, coherences[-1] ) )
+            # print("K=%02d: Coherence=%.4f" % ( k, coherences[-1] ) )
         return k_values, coherences
     
     def calculate_coherence( self, w2v_model, term_rankings ):
