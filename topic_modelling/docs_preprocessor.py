@@ -53,12 +53,6 @@ class DocsPreprocessor:
     def __init__(self):
         self.stop_words = set(stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
-        self.min_words = 0
-        self.avg_words = 0
-        self.max_words = 0
-        self.min_char = 0
-        self.avg_char = 0
-        self.max_char = 0
         
     def process(self, docs):
         """

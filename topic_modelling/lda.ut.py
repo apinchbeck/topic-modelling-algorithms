@@ -13,11 +13,10 @@ class TestLDA(unittest.TestCase):
         self.description_1000_csv = pd.read_csv("docs/description_1000.csv")
         self.dp = DocsPreprocessor()
         self.description_1000 = self.dp.process(self.description_1000_csv)
-        self.lda = LDA(self.description_1000_csv)
-        
+        self.lda = LDA(self.description_1000)
 
     def test_1(self):
-        print(self.lda.dictionary)
+        k_values, coherence_values, topic_list = self.lda.compute_coherence_values(5, 20, 5)
 
 if __name__ == '__main__':
     unittest.main()
