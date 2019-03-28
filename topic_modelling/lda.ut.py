@@ -16,7 +16,8 @@ class TestLDA(unittest.TestCase):
         self.lda = LDA(self.description_1000)
 
     def test_1(self):
-        k_values, coherence_values, topic_list = self.lda.compute_coherence_values(5, 20, 5)
+        k_values, coherence_values, topic_list = 
+            self.lda.compute_coherence_values(5, 20, 5)
 
 if __name__ == '__main__':
     unittest.main()

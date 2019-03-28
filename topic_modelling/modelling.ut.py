@@ -14,10 +14,10 @@ class TestModelling(unittest.TestCase):
     def setUp(self):
         self.description_csv = pd.read_csv("docs/description.csv")
         self.description_1000_csv = pd.read_csv("docs/description_1000.csv")
-        self.mdl = Modelling(self.description_1000_csv)
+        self.mdl = Modelling(self.description_csv)
     
     def test_run_lda(self):
-        self.mdl.run_lda(5, 20, 5)
+        self.mdl.run_algorithms(5, 20, 5, 20)
 
 if __name__ == '__main__':
     unittest.main()

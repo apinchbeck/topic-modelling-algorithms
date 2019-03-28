@@ -27,6 +27,7 @@ Dependencies
 - sklearn
 - operator
 - itertools
+- matplotlib
 
 *Input Data*
 
