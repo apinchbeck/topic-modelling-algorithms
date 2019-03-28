@@ -30,9 +30,6 @@ class Modelling:
         self.docs = self.dp.process(docs)
         self.nmf = NMF(self.docs)
         self.lda = LDA(self.docs)
-    
-    def run_algorithms(self, kmin, kmax, kstep, top):
-        self.run_lda(kmin, kmax, kstep)
 
     def run_lda(self, kmin, kmax, kstep, n):
         k_values, coherence_values, topic_list =                               \
