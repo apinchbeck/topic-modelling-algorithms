@@ -29,6 +29,7 @@ Dependencies
 - itertools
 - mathplotlib
 - os.path
+- biterm
 
 *Input Data*
 
