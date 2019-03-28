@@ -24,6 +24,11 @@ Dependencies
 - numpy
 - nltk
 - gensim
+- sklearn
+- operator
+- itertools
+- mathplotlib
+- os.path
 
 *Input Data*
 
@@ -58,8 +63,7 @@ Change Log
 To Do
 -----
 
-- Edit code to make it so that the required document can just be a list
-    of short text, instead of one that needs "description" as its title.
+- Edit code to make it so that the required document can just be a list of short text, instead of one that needs "description" as its title.
 
 License
 =======
