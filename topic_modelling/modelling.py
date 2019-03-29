@@ -5,6 +5,7 @@ matplotlib.rcParams.update({"font.size": 14})
 
 from nmf import NMF
 from lda import LDA
+from btm import BTM
 from docs_preprocessor import DocsPreprocessor
 
 import csv
@@ -30,6 +31,7 @@ class Modelling:
         self.docs = self.dp.process(docs)
         self.nmf = NMF(self.docs)
         self.lda = LDA(self.docs)
+        self.btm = BTM(self.docs)
 
     def run_lda(self, kmin, kmax, kstep, n):
         k_values, coherence_values, topic_list =                               \

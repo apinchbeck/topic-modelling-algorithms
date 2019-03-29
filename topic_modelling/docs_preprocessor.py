@@ -15,6 +15,10 @@ from nltk.corpus import wordnet
 from gensim.models import Phrases
 from gensim.models.phrases import Phraser
 
+from os.path import join as pjoin
+# Set the save path for your own machine
+save_path = "/home/angie/Work/Fatemeh_Fard/topic-modelling/docs/clean_"
+
 class DocsPreprocessor:
     """
     A class used to process text documents in preparation for applying 
@@ -54,7 +58,7 @@ class DocsPreprocessor:
         self.stop_words = set(stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
         
-    def process(self, docs):
+    def process(self, docs, file_name):
         """
         Essentially the main method. Calls all other methods in order
         to process a csv doc in preparation for topic modelling.
@@ -71,7 +75,23 @@ class DocsPreprocessor:
         result = self.remove_nltk_stopwords(result)
         result = self.lemmatize_doc(result)
         result = self.append_bigrams_and_trigrams(result)
+        self.write_results(result, file_name)
         return result
+    
+    def write_results(self, docs_in, file_name):
+        """
+        Writes the cleaned results to the docs folder. 
+        """
+        f = open(save_path + file_name + ".txt", "w")
+        docs = []
+        for d in docs_in:
+            row = ""
+            for word in d:
+                row += word + " "
+            f.write(row)
+            f.write("\n")
+        f.close()
+
     
     def append_bigrams_and_trigrams(self, docs):
         """
